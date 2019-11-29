@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Linq;
-using System.Speech.Recognition;
 using System.Speech.Synthesis;
-using System.Threading;
 
 namespace ConsoleApp12
 {
@@ -36,15 +34,16 @@ namespace ConsoleApp12
                 SpeechSynthesizer synthesizer = new SpeechSynthesizer();
                 synthesizer.SelectVoiceByHints(VoiceGender.Female, VoiceAge.Child);
                 synthesizer.Volume = 100;
-                synthesizer.Rate = 5;
+                synthesizer.Rate = 7;
 
                 if (buzzes > 0)
                 {
-                    //   Console.WriteLine(CreateBuzzString(i));
+                    Console.WriteLine(CreateBuzzString(buzzes));
                     synthesizer.Speak(CreateBuzzString(buzzes));
                 }
                 else
                 {
+                    Console.WriteLine(i.ToString());
                     synthesizer.Speak(i.ToString());
                 }
             }
