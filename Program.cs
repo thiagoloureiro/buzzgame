@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Speech.Synthesis;
+using System.Text.RegularExpressions;
 
 namespace ConsoleApp12
 {
@@ -8,27 +9,14 @@ namespace ConsoleApp12
     {
         private static void Main(string[] args)
         {
+            var specials = new int[] { 4, 7 };
             for (int i = 1; i < 100; i++)
             {
-                var buzzes = Check7and4(i);
+                var buzzes = CheckLiteralSpecials(specials, i);
 
-                if (i % 4 == 0)
+                foreach (var s in specials)
                 {
-                    if (i / 4 == 4)
-                    {
-                        buzzes++;
-                    }
-
-                    buzzes++;
-                }
-
-                if (i % 7 == 0)
-                {
-                    if (i / 7 == 7)
-                    {
-                        buzzes++;
-                    }
-                    buzzes++;
+                    buzzes += NumBuzzesFromMultiples(s, i);
                 }
 
                 SpeechSynthesizer synthesizer = new SpeechSynthesizer();
@@ -39,12 +27,12 @@ namespace ConsoleApp12
                 if (buzzes > 0)
                 {
                     Console.WriteLine(CreateBuzzString(buzzes));
-                    synthesizer.Speak(CreateBuzzString(buzzes));
+                    //synthesizer.Speak(CreateBuzzString(buzzes));
                 }
                 else
                 {
                     Console.WriteLine(i.ToString());
-                    synthesizer.Speak(i.ToString());
+                    //synthesizer.Speak(i.ToString());
                 }
             }
         }
@@ -59,12 +47,35 @@ namespace ConsoleApp12
             return str;
         }
 
-        private static int Check7and4(int number)
+        private static int NumBuzzesFromMultiples(int special, int number)
+        {
+            int buzzes = 0;
+            int pow = 1;
+            int n = number;
+            while (n % special == 0)
+            {
+                ++buzzes;
+                n /= special;
+            }
+            for (int i = 0; i < buzzes; ++i)
+            {
+                pow *= special;
+            }
+            if (pow == number) { return buzzes; }
+            else
+            {
+                return (number % special == 0) ? 1 : 0;
+            }
+        }
+
+        private static int CheckLiteralSpecials(int[] specials, int number)
         {
             int contains = 0;
 
-            contains += number.ToString().Count(x => x == '4');
-            contains += number.ToString().Count(x => x == '7');
+            foreach (var s in specials)
+            {
+                contains += new Regex(s.ToString()).Matches(number.ToString()).Count;
+            }
 
             return contains;
         }
