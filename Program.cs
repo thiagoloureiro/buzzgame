@@ -1,15 +1,18 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Linq;
 using System.Speech.Synthesis;
 using System.Text.RegularExpressions;
 
-namespace ConsoleApp12
+namespace Buzz
 {
     internal class Program
     {
         private static void Main(string[] args)
         {
             var specials = new int[] { 4, 7 };
+            Debug.Assert(!specials.Contains(1));
+
             for (int i = 1; i < 100; i++)
             {
                 var buzzes = CheckLiteralSpecials(specials, i);
@@ -27,12 +30,12 @@ namespace ConsoleApp12
                 if (buzzes > 0)
                 {
                     Console.WriteLine(CreateBuzzString(buzzes));
-                    //synthesizer.Speak(CreateBuzzString(buzzes));
+                    synthesizer.Speak(CreateBuzzString(buzzes));
                 }
                 else
                 {
                     Console.WriteLine(i.ToString());
-                    //synthesizer.Speak(i.ToString());
+                    synthesizer.Speak(i.ToString());
                 }
             }
         }
