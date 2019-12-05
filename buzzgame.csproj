@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{033B5A3C-F2F6-4596-92A6-CCC8FAF27D0B}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>ConsoleApp12</RootNamespace>
-    <AssemblyName>ConsoleApp12</AssemblyName>
+    <RootNamespace>BuzzGame</RootNamespace>
+    <AssemblyName>BuzzGame</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>

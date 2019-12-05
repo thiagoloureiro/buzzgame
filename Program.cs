@@ -4,7 +4,7 @@ using System.Linq;
 using System.Speech.Synthesis;
 using System.Text.RegularExpressions;
 
-namespace Buzz
+namespace BuzzGame
 {
     internal class Program
     {
